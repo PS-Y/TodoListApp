@@ -7,9 +7,17 @@ import com.todo.service.TodoSortByName;
 
 public class TodoList {
 	private List<TodoItem> list;
-
+	
 	public TodoList() {
 		this.list = new ArrayList<TodoItem>();
+	}
+
+	public TodoItem getItem(int index) {
+		return list.get(index);
+	}
+	
+	public int getCount() {
+		return list.size();
 	}
 
 	public void addItem(TodoItem t) {
@@ -35,14 +43,13 @@ public class TodoList {
 
 	}
 
-	public void listAll() {
-		System.out.println("\n"
-				+ "inside list_All method\n");
-		for (TodoItem myitem : list) {
-			System.out.println(myitem.getTitle() + myitem.getDesc());
+	public void listAll(TodoList l) {
+		System.out.println("\n" + "inside list_All method\n");
+		for (int i = 0; i < l.getCount(); i++) {
+			System.out.println((i + 1) + ". " + l.getItem(i).toString());
 		}
 	}
-	
+
 	public void reverseList() {
 		Collections.reverse(list);
 	}
@@ -57,7 +64,8 @@ public class TodoList {
 
 	public Boolean isDuplicate(String title) {
 		for (TodoItem item : list) {
-			if (title.equals(item.getTitle())) return true;
+			if (title.equals(item.getTitle()))
+				return true;
 		}
 		return false;
 	}
